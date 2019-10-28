@@ -116,19 +116,19 @@ const businesses = [
 const outEl = document.querySelector("#output")
 outEl.innerHTML = "<h1>Active Businesses</h1>"
 
-businesses.forEach(business => {
-    const zipcodeKey = "addressZipCode"
-    outEl.innerHTML += `
-        <h2>${business.companyName}</h2>
-        <section>
-            ${business.addressFullStreet}
-        </section>
-        <section>
-    ${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
-    </section>
-    `
-    outEl.innerHTML += "<hr/>"
-});
+// businesses.forEach(business => {
+//     const zipcodeKey = "addressZipCode"
+//     outEl.innerHTML += `
+//         <h2>${business.companyName}</h2>
+//         <section>
+//             ${business.addressFullStreet}
+//         </section>
+//         <section>
+//     ${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
+//     </section>
+//     `
+//     outEl.innerHTML += "<hr/>"
+// });
 
 // Array to contain all the New York businesses
 const newYorkBusinesses = businesses.filter(business => {
@@ -140,3 +140,21 @@ const newYorkBusinesses = businesses.filter(business => {
   
     return inNewYork
   })
+
+console.log(newYorkBusinesses)
+
+// Lightning Exercise: Use filter() to create another array named manufacturingBusinesses that will contain all businesses in the manufacturing industry. Display those to the DOM.
+
+newYorkBusinesses.forEach(business => {
+        const zipcodeKey = "addressZipCode"
+        outEl.innerHTML += `
+            <h2>${business.companyName}</h2>
+            <section>
+                ${business.addressFullStreet}
+            </section>
+            <section>
+        ${business.addressCity}, ${business["addressStateCode"]} ${business[zipcodeKey]}
+        </section>
+        `
+        outEl.innerHTML += "<hr/>"
+    });
