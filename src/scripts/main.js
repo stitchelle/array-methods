@@ -305,25 +305,84 @@ outEl.innerHTML += "<h1>Search Results</h1>";
 
 // Lightning Exercise 2: Refactor your code so that if the search text is found in the first name, or last name, of any purchasing agent, show that agent.
 
-document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
-    if (keyPressEvent.charCode === 13) {
-      /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+// document.querySelector("#companySearch").addEventListener("keypress", keyPressEvent => {
+//     if (keyPressEvent.charCode === 13) {
+//       /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
 
-      const foundBusiness = businesses.find(
-        business => {
-          const agentFirst = business.purchasingAgent.nameFirst
-          const agentLast = business.purchasingAgent.nameLast
-          const input = keyPressEvent.target.value
-          return agentFirst.includes(input) || agentLast.includes(input)
-        });
+//       const foundBusiness = businesses.find(
+//         business => {
+//           const agentFirst = business.purchasingAgent.nameFirst
+//           const agentLast = business.purchasingAgent.nameLast
+//           const input = keyPressEvent.target.value
+//           return agentFirst.includes(input) || agentLast.includes(input)
+//         });
 
-      outEl.innerHTML = `
-                <h2>
-                ${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}
-                </h2>
-                <section>
-                ${foundBusiness.companyName}
-                </section>
-            `;
-    }
-  });
+//       outEl.innerHTML = `
+//                 <h2>
+//                 ${foundBusiness.purchasingAgent.nameFirst} ${foundBusiness.purchasingAgent.nameLast}
+//                 </h2>
+//                 <section>
+//                 ${foundBusiness.companyName}
+//                 </section>
+//             `;
+//     }
+//   });
+
+
+
+
+  outEl.innerHTML += "<h1>Businesses</h1>";
+
+businesses.forEach(business => {
+  /* CALCULATE ORDER SUMMARY */
+  // let totalOrders = 0
+  // business.orders.forEach(order => totalOrders += order)
+
+  /* CALCULATE ORDER SUMMARY */
+  let totalOrders = business.orders.reduce(
+    (currentTotal, nextValue) => currentTotal += nextValue,
+    0
+  )
+
+
+
+  outEl.innerHTML += `
+      <h2>
+          ${business.companyName}
+          ($${totalOrders.toFixed(2)})
+      </h2>
+      <section>
+          ${business.addressFullStreet}
+      </section>
+      <section>
+          ${business.addressCity},
+          ${business.addressStateCode}
+          ${business.addressZipCode}
+      </section>
+  `;
+  outEl.innerHTML += "<hr/>";
+});
+
+
+
+
+// Lightning Exercise 1: Use the reduce method on the following array to determine how much total rain fell last month.
+
+const monthlyRainfall = [23, 13, 27, 20, 20, 31, 33, 26, 19, 12, 14, 12, 10]
+
+const totalRainfall = monthlyRainfall.reduce((total, currentValue) => {
+  console.log(total, currentValue)
+  return total += currentValue
+}, 1000)
+
+console.log(totalRainfall)
+
+
+
+// Lightning Exercise 2: Use the reduce method on the following array to build a sentence.
+
+const words = ["The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"]
+
+const TheSentence = words.reduce((sentence, currentWord) => sentence += ` ${currentWord}`)
+
+console.log(`${TheSentence}.`)
