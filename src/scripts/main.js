@@ -195,7 +195,7 @@ const outEl = document.querySelector("#output")
 
 
 
-outEl.innerHTML += "<h1>Purchasing Agents</h1>";
+// outEl.innerHTML += "<h1>Purchasing Agents</h1>";
 
 /*
     Using map(), you extract the purchasing agent object
@@ -224,43 +224,73 @@ outEl.innerHTML += "<h1>Purchasing Agents</h1>";
 //     "phoneNumber": "235.266.6278"
 // }
 
-const agentsWithCompanyAndPhone = businesses.map(business => {
-    return {
-      "fullName": `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
-      "company": business.companyName,
-      "phoneNumber": business.phoneWork
-    }
+// const agentsWithCompanyAndPhone = businesses.map(business => {
+//     return {
+//       "fullName": `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+//       "company": business.companyName,
+//       "phoneNumber": business.phoneWork
+//     }
   
-  })
+//   })
   
-  console.table(agentsWithCompanyAndPhone)
+//   console.table(agentsWithCompanyAndPhone)
   
-  agentsWithCompanyAndPhone.forEach(agent => {
-    outEl.innerHTML += `<h2>${agent.fullName}</h2>`;
-    outEl.innerHTML += `<p>${agent.company}</p>`
-    outEl.innerHTML += `<p>Phone: ${agent.phoneNumber}</p>`
-    outEl.innerHTML += "<hr/>";
-  });
+//   agentsWithCompanyAndPhone.forEach(agent => {
+//     outEl.innerHTML += `<h2>${agent.fullName}</h2>`;
+//     outEl.innerHTML += `<p>${agent.company}</p>`
+//     outEl.innerHTML += `<p>Phone: ${agent.phoneNumber}</p>`
+//     outEl.innerHTML += "<hr/>";
+//   });
 
 
 
 
-  const candies = [
-    {
-        name: "Lollipop",
-        price: 2.99
-    },
-    {
-        name: "Tootsie Roll",
-        price: 1.49
-    },
-    {
-        name: "Sugar Daddy",
-        price: 2.49
-    }
-]
+//   const candies = [
+//     {
+//         name: "Lollipop",
+//         price: 2.99
+//     },
+//     {
+//         name: "Tootsie Roll",
+//         price: 1.49
+//     },
+//     {
+//         name: "Sugar Daddy",
+//         price: 2.49
+//     }
+// ]
 
-const firstCheapCandy = candies.find(candy => candy.price < 2.00)
+// const firstCheapCandy = candies.find(candy => candy.price < 2.00)
 
-console.log(firstCheapCandy)
-> { name: "Tootsie Roll", price: 1.49 }
+// console.log(firstCheapCandy)
+// > { name: "Tootsie Roll", price: 1.49 }
+
+
+
+
+document
+    .querySelector("#companySearch")
+    .addEventListener("keypress", keyPressEvent => {
+        if (keyPressEvent.charCode === 13) {
+            /* WHEN  USER PRESSES ENTER, FIND MATCHING BUSINESS */
+            const foundBusiness = businesses.find(
+                business =>
+                    business.companyName.includes(keyPressEvent.target.value)
+            );
+
+            outEl.innerHTML = `
+                <h2>
+                ${foundBusiness.companyName}
+                </h2>
+                <section>
+                ${foundBusiness.addressFullStreet}
+
+                </section>
+                <section>
+                ${foundBusiness.addressCity},
+                ${foundBusiness.addressStateCode}
+                ${foundBusiness.addressZipCode}
+                </section>
+            `;
+        }
+    });
