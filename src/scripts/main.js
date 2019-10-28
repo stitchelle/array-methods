@@ -124,5 +124,3 @@ businesses.forEach(business => {
   outEl.innerHTML += "<hr/>"
 });
 
-const outEl = document.querySelector("#output")
-outEl
