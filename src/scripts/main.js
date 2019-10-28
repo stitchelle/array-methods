@@ -201,13 +201,43 @@ outEl.innerHTML += "<h1>Purchasing Agents</h1>";
     Using map(), you extract the purchasing agent object
     from each business and store it in a new array
 */
-const agents = businesses.map(business => {
-    return business.purchasingAgent
-})
+// const agents = businesses.map(business => {
+//     return business.purchasingAgent
+// })
 
-console.table(agents)
+// console.table(agents)
 
-agents.forEach(agent => {
-  outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast}</h2>`;
-  outEl.innerHTML += "<hr/>";
-});
+// agents.forEach(agent => {
+//   outEl.innerHTML += `<h2>${agent.nameFirst} ${agent.nameLast}</h2>`;
+//   outEl.innerHTML += "<hr/>";
+// });
+
+
+
+
+// Lightning Exercise: Instead of just returning the purchasing agent object, return a new object that has the full name of the purchasing agent, the company name, and the phone number. The data structure is shown below. Use that new data structure to display the agent with their company and phone number
+
+
+// {
+//     "fullName": "Kaylee Gutkowski",
+//     "company": "Highnix",
+//     "phoneNumber": "235.266.6278"
+// }
+
+const agentsWithCompanyAndPhone = businesses.map(business => {
+    return {
+      "fullName": `${business.purchasingAgent.nameFirst} ${business.purchasingAgent.nameLast}`,
+      "company": business.companyName,
+      "phoneNumber": business.phoneWork
+    }
+  
+  })
+  
+  console.table(agentsWithCompanyAndPhone)
+  
+  agentsWithCompanyAndPhone.forEach(agent => {
+    outEl.innerHTML += `<h2>${agent.fullName}</h2>`;
+    outEl.innerHTML += `<p>${agent.company}</p>`
+    outEl.innerHTML += `<p>Phone: ${agent.phoneNumber}</p>`
+    outEl.innerHTML += "<hr/>";
+  });
